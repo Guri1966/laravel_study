@@ -16,6 +16,12 @@ use App\Http\Controllers\MemoController;
 // Route::get('/', function () {
 //     return view('home');
 // });
+
+Route::get(
+    '/',
+    'BlogController@showList'
+)->name('blogs');
+
 Route::get('/', 'App\\Http\\Controllers\\MemoController@show');
 
 Route::post('/add', 'App\\Http\\Controllers\\MemoController@add');
