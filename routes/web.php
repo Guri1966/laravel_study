@@ -16,6 +16,7 @@ use App\Http\Controllers\MemoController;
 // Route::get('/', function () {
 //     return view('home');
 // });
+//ブログ一覧を表示（名前をblogsと名付ける)
 
 Route::get(
     '/',
