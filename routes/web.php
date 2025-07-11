@@ -17,5 +17,6 @@ use App\Http\Controllers\MemoController;
 //     return view('home');
 // });
 Route::get('/', 'App\\Http\\Controllers\\MemoController@show');
-
+Route::get('edit/{edit_id}', 'App\\Http\\Controllers\\MemoController@getEdit');
 Route::post('/add', 'App\\Http\\Controllers\\MemoController@add');
+Route::post('/delete', 'App\\Http\\Controllers\\MemoController@delete');
