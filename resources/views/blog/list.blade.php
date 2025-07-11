@@ -4,7 +4,8 @@
 3　共通フッターを作る
 4　共通テンプレを継承したリストを作る
 -->
-@extends('blog/layouts')
+@extends('blog.layouts')
+@section('title','ブログ一覧')
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -26,3 +27,4 @@
     </div>
 </div>
 @endsection
+@include('blog.footer')

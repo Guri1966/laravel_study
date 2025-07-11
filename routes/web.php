@@ -18,8 +18,8 @@ use App\Http\Controllers\MemoController;
 // });
 //ブログ一覧を表示（名前をblogsと名付ける)
 
-Route::get('/', 'BlogController@showList')->name('blogs');
+Route::get('/', 'App\\Http\\Controllers\\BlogController@showList')->name('blogs');
 
-Route::get('/', 'App\\Http\\Controllers\\MemoController@show');
+// Route::get('/', 'App\\Http\\Controllers\\MemoController@show');
 
-Route::post('/add', 'App\\Http\\Controllers\\MemoController@add');
+// Route::post('/add', 'App\\Http\\Controllers\\MemoController@add');
