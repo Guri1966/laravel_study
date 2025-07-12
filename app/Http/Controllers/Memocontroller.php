@@ -7,28 +7,14 @@ use App\Models\Memo;
 
 class Memocontroller extends Controller
 {
+
     public function show()
     {
-        //　memosテーブルから全データを取得
-        $memo_info = Memo::get();
-
-        /**
-         * データを入れた変数$memo_infoを
-         * memo_infoという名前で
-         * view(homo.blade.php)へ渡す
-         */
+        $memo_info = Memo::get(); // 全件取得
 
         return view('home')
             ->with('memo_info', $memo_info);
-        /**
-         * dd($memo_info);
-         * データの中身を確認    
-         * controllerでもviewでも使える
-         * どんなSQLが実行されているかを見ることが出来る
-         * dd(Memo::tosql()); 
-         */
     }
-
 
     public function add(Request $request)
     {
@@ -37,7 +23,7 @@ class Memocontroller extends Controller
         $memo_model->content = $memo_text;
         $memo_model->save();
 
-        return self::show(); // ここを書き替える
+        return self::show();
     }
 
     public function delete(Request $request)
