@@ -22,8 +22,6 @@ class Memocontroller extends Controller
         $memo_model = new Memo();
         $memo_model->content = $memo_text;
         $memo_model->save();
-
-        return self::show();
     }
 
     public function delete(Request $request)

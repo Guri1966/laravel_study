@@ -13,13 +13,16 @@
     <div class="container">
         <div class="memo_area">
             @yield('content')
+
             <div class="memo_show">
+                @isset($memo_info)
                 @foreach($memo_info as $memo)
                 <div class="memo_item">
                     <div class="memo_title">
-                        <time>{{$memo->created_at}}</time>
-                        <p>{{$memo->content}}</p>
+                        <time>{{ $memo->created_at }}</time>
+                        <p>{{ $memo->content }}</p>
                     </div>
+
                     <div class="btn_area">
                         <div class="edit_form">
                             <form action="{{ asset('/edit/'.$memo->id) }}" method="get">
@@ -27,16 +30,18 @@
                                 <input type="submit" value="編集">
                             </form>
                         </div>
+
                         <div class="del_area">
                             <form action="{{ asset('/delete') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="delete_id" value="{{$memo->id}}">
+                                <input type="hidden" name="delete_id" value="{{ $memo->id }}">
                                 <x-button-form action="/delete" label="削除" class="btn-delete" />
                             </form>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                @endisset
             </div>
         </div>
     </div>
