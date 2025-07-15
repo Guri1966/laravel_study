@@ -22,6 +22,8 @@ class Memocontroller extends Controller
         $memo_model = new Memo();
         $memo_model->content = $memo_text;
         $memo_model->save();
+
+        return redirect('/');
     }
 
     public function delete(Request $request)
@@ -29,13 +31,38 @@ class Memocontroller extends Controller
         $delete_id = $request->delete_id;
 
         $memo_model = Memo::find($delete_id);
+
+        if (!$memo_model) {
+            return redirect('/')
+                ->with('error', '指定されたメモは存在しません');
+        }
+
         $memo_model->delete();
 
-        return self::show();
+        return redirect('/')->with('success', '削除しました');
     }
+
 
     public function getEdit($edit_id)
     {
-        return view('edit');
+        $memo_info = Memo::find($edit_id); //Idでメモを1件取得
+        return view('edit')
+            ->with('memo_info', $memo_info); //ビューに渡す
+
+    }
+
+
+    public function postEdit(Request $request)
+    {
+        $edit_id = $request->edit_id;
+        $edit_memo = $request->edit_memo;
+
+        $memo = Memo::find($edit_id);
+        if ($memo) {
+            $memo->content = $edit_memo;
+            $memo->save();
+        }
+
+        return redirect('/');
     }
 }

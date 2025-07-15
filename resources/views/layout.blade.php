@@ -25,17 +25,17 @@
 
                     <div class="btn_area">
                         <div class="edit_form">
-                            <form action="{{ asset('/edit/'.$memo->id) }}" method="get">
+                            <form action="{{ url('/edit/'.$memo->id) }}" method="get">
                                 @csrf
                                 <input type="submit" value="編集">
                             </form>
                         </div>
 
                         <div class="del_area">
-                            <form action="{{ asset('/delete') }}" method="post">
-                                @csrf
+                            <form action="{{ url('/delete') }}" method="post">
                                 <input type="hidden" name="delete_id" value="{{ $memo->id }}">
-                                <x-button-form action="/delete" label="削除" class="btn-delete" />
+                                @csrf
+                                <input type="submit" value="削除">
                             </form>
                         </div>
                     </div>

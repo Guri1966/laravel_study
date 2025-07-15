@@ -21,3 +21,4 @@ Route::get('/', [MemoController::class, 'show']);
 Route::get('/edit/{edit_id}', [MemoController::class, 'getEdit']);
 Route::post('/add', [MemoController::class, 'add']);
 Route::post('/delete', [MemoController::class, 'delete']);
+Route::post('/update', [MemoController::class, 'postEdit']);
