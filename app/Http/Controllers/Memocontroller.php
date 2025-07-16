@@ -65,4 +65,12 @@ class Memocontroller extends Controller
 
         return redirect('/');
     }
+
+    public function find($edit_id)
+    {
+        $memo_info = Memo::find($edit_id); //Idでメモを1件取得
+        return view('edit')
+            ->with('memo_info', $memo_info); //ビューに渡す
+
+    }
 }
