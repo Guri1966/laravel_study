@@ -21,8 +21,7 @@
                 </form>
                 <div class="search_area" style="margin-top: 50px">
                     <h2>検索</h2>
-                    <form action="{{url('/find')}}" method="post">
-                        @csrf
+                    <form action="{{url('/find')}}" method="get">
                         <input class="memo_text" type="text" name="search_word" id="search_word">
                         <input type="submit" value="検索">
                     </form>

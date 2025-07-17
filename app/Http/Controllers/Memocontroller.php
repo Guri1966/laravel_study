@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Memo;
 
-class Memocontroller extends Controller
+class MemoController extends Controller
 {
 
     public function show()
@@ -18,30 +18,16 @@ class Memocontroller extends Controller
 
     public function add(Request $request)
     {
-        $memo_text = $request->memo_text;
+        $request->validate([
+            'memo_text' => 'required|string|max:255'
+        ]);
+
         $memo_model = new Memo();
-        $memo_model->content = $memo_text;
+        $memo_model->content = $request->memo_text;
         $memo_model->save();
 
         return redirect('/');
     }
-
-    public function delete(Request $request)
-    {
-        $delete_id = $request->delete_id;
-
-        $memo_model = Memo::find($delete_id);
-
-        if (!$memo_model) {
-            return redirect('/')
-                ->with('error', '指定されたメモは存在しません');
-        }
-
-        $memo_model->delete();
-
-        return redirect('/')->with('success', '削除しました');
-    }
-
 
     public function getEdit($edit_id)
     {
@@ -54,6 +40,10 @@ class Memocontroller extends Controller
 
     public function postEdit(Request $request)
     {
+        $request->validate([
+            'edit_memo' => 'required|string|max:255'
+        ]);
+
         $edit_id = $request->edit_id;
         $edit_memo = $request->edit_memo;
 
@@ -66,9 +56,29 @@ class Memocontroller extends Controller
         return redirect('/');
     }
 
+    public function delete(Request $request)
+    {
+        $delete_id = $request->delete_id;
+        $memo_model = Memo::find($delete_id);
+
+        if (!$memo_model) {
+            return redirect('/')
+                ->with('error', '指定されたメモは存在しません');
+        }
+
+        $memo_model->delete();
+
+        return redirect('/')->with('success', '削除しました');
+    }
+
     public function find(Request $request)
     {
         $search_word = $request->input('search_word');
+
+        if (empty($search_word)) {
+            return redirect('/')->with('error', '検索後を入力してください');
+        }
+
         $memo_info = Memo::where('content', 'like', '%' . $search_word . '%')->get();
         return view('home')->with('memo_info', $memo_info);
     }

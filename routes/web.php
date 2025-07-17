@@ -22,5 +22,5 @@ Route::get('/edit/{edit_id}', [MemoController::class, 'getEdit']);
 Route::post('/add', [MemoController::class, 'add']);
 Route::post('/delete', [MemoController::class, 'delete']);
 Route::post('/update', [MemoController::class, 'postEdit']);
-Route::post('/find', [MemoController::class, 'find']);  //検索機能実装中
+Route::get('/find', [MemoController::class, 'find']);  //検索機能実装中
 Route::post('/hold/{hold_id}', [MemoController::class, 'toggle_hold']);
