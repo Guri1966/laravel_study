@@ -32,6 +32,9 @@
                 @isset($memo_info)
                 @foreach($memo_info as $memo)
                 <div class="memo_item">
+                    @if ($memo->invalid ==1)
+                    <p style="color: red;">📌</p>
+                    @endif
                     <div class="memo_title">
                         <time>{{ $memo->created_at }}</time>
                         <p>{{ $memo->content }}</p>
@@ -49,6 +52,14 @@
                                 <input type="hidden" name="delete_id" value="{{ $memo->id }}">
                                 @csrf
                                 <input type="submit" value="削除">
+                            </form>
+                        </div>
+
+                        <div class="hold_area">
+                            <form action="{{ '/hold/'.$memo->id}}" method="post">
+                                @csrf
+                                <input type="hidden" name="hold_id" value="{{ $memo->id}}">
+                                <input type="submit" value="{{ $memo->invalid == 1 ? '解除' : '固定' }}">
                             </form>
                         </div>
                     </div>

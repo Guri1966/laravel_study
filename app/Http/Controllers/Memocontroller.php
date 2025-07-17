@@ -10,7 +10,7 @@ class Memocontroller extends Controller
 
     public function show()
     {
-        $memo_info = Memo::get(); // 全件取得
+        $memo_info = Memo::orderBy('invalid', 'desc')->get();
 
         return view('home')
             ->with('memo_info', $memo_info);
@@ -71,5 +71,18 @@ class Memocontroller extends Controller
         $search_word = $request->input('search_word');
         $memo_info = Memo::where('content', 'like', '%' . $search_word . '%')->get();
         return view('home')->with('memo_info', $memo_info);
+    }
+
+    public function toggle_hold($hold_id)
+    {
+        try {
+            $memo = Memo::findOrFail($hold_id);
+            $memo->invalid = ($memo->invalid == 1) ? 0 : 1;
+            $memo->save();
+
+            return redirect()->back()->with('success', '固定状態を変更しました');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'エラーが発生しました: ' . $e->getMessage());
+        }
     }
 }

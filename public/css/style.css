@@ -68,19 +68,22 @@ body{
     margin: auto;
 }
 
-.edit_form{
+.edit_form,.del_area{
     margin-right: 10px;
 }
 
 .edit_form input,
-.del_area input {
+.del_area input ,
+.hold_area input{
     border-radius: 5px;
     padding: 5px 12px;
     border: none;
 }
+
 .memo_form input[type="submit"]:hover,
 .edit_form input:hover,
-.del_area input:hover{
+.del_area input:hover,
+.hold_area input:hover{
     opacity: .8;
 }
 
@@ -92,6 +95,12 @@ body{
 
 .del_area input{
     background-color: #d64045;
+    color: #fefefe;
+    font-weight: bold;
+}
+
+.hold_area input{
+    background-color: #d7ee0b;
     color: #fefefe;
     font-weight: bold;
 }
