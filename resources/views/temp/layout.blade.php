@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="memo_area">
             @yield('content')
@@ -19,6 +20,7 @@
                 @foreach($memo_info as $memo)
                 <div class="memo_item">
                     <div class="memo_title">
+                        <?php dd($memo_info); ?> // 追加
                         <time>{{ $memo->created_at }}</time>
                         <p>{{ $memo->content }}</p>
                     </div>

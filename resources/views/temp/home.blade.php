@@ -1,3 +1,6 @@
+<!-- @extends('layout')
+@section('title','メモ帳')-->
+
 <!doctype html>
 <html lang="ja">
 
@@ -8,28 +11,32 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>メモ帳</title>
 </head>
+<!-- @section('content') -->
 
 <body>
+
     <div class="container">
-        <div class="memo_area">
-            <div class="memo_form">
-                <h2>メモを追加</h2>
-                <form action="{{url('/add')}}" method="post">
+        <div class="memo_form">
+            <h2>メモを追加</h2>
+            <form action="{{url('/add')}}" method="post">
+                @csrf
+                <input class="memo_text" type="text" name="memo_text" id="memo_text">
+                <input type="submit" value="追加">
+            </form>
+            <div class="search_area" style="margin-top: 50px">
+                <h2>検索</h2>
+                <form action="{{url('/find')}}" method="post">
                     @csrf
-                    <input class="memo_text" type="text" name="memo_text" id="memo_text">
-                    <input type="submit" value="追加">
+                    <input class="memo_text" type="text" name="search_word" id="search_word">
+                    <input type="submit" value="検索">
                 </form>
-                <div class="search_area" style="margin-top: 50px">
-                    <h2>検索</h2>
-                    <form action="{{url('/find')}}" method="post">
-                        @csrf
-                        <input class="memo_text" type="text" name="search_word" id="search_word">
-                        <input type="submit" value="検索">
-                    </form>
-                </div>
             </div>
+        </div>
+        <div class="memo_area">
+            <!-- <?php dd($memo_info); ?> // 追加 -->
+            <!-- @yield('content') -->
             <div class="memo_show">
-                @isset($memo_info)
+                <!-- @if (isset($memo_info) && $memo_info->isNotEmpty()) -->
                 @foreach($memo_info as $memo)
                 <div class="memo_item">
                     <div class="memo_title">
@@ -59,5 +66,6 @@
         </div>
     </div>
 </body>
+<!-- @endsection -->
 
 </html>
