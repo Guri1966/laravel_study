@@ -29,7 +29,9 @@
                 </div>
             </div>
             <div class="memo_show">
-                @isset($memo_info)
+                @if($memo_info->isEmpty())
+                <p>見つかりませんでした</p>
+                @else
                 @foreach($memo_info as $memo)
                 <div class="memo_item">
                     @if ($memo->invalid ==1)
@@ -42,7 +44,6 @@
                     <div class="btn_area">
                         <div class="edit_form">
                             <form action="{{ url('/edit/'.$memo->id) }}" method="get">
-                                @csrf
                                 <input type="submit" value="編集">
                             </form>
                         </div>
@@ -65,7 +66,7 @@
                     </div>
                 </div>
                 @endforeach
-                @endisset
+                @endif
             </div>
         </div>
     </div>
